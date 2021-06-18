@@ -3,6 +3,10 @@ from classify import teachable_machine_classification
 from PIL import Image
 
 
+st.title("Food Image Classifier")
+
+st.write(['chicken_curry', 'chicken_wings', 'fried_rice', 'grilled_salmon',
+       'hamburger', 'ice_cream', 'pizza', 'ramen', 'steak', 'sushi'] "can be predicted")
 
 
 
