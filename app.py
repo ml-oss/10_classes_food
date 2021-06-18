@@ -12,7 +12,7 @@ if uploaded_file is not None:
         st.image(image, caption='img', use_column_width=True)
         st.write("")
         st.write("Classifying...")
-        label = teachable_machine_classification(image, '/Users/atharvgupta/app/model.sav')
+        label = teachable_machine_classification(image, 'model.sav')
         if label == 0:
             st.write("chicken_curry")  
         if label == 1:
