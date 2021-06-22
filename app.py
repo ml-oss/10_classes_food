@@ -1,5 +1,5 @@
 import streamlit as st
-from classify import teachable_machine_classification
+from classify import pred_plot
 from PIL import Image
 
 
