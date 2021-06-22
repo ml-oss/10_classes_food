@@ -11,7 +11,7 @@ def load_and_prep_image(filename,img_shape = 224):
     return img
 
 
-def pred_plot(model,filename,class_names):
+def pred_plot(filename,class_names):
     
     model = tf.keras.models.load_model("model.sav")
     img = load_and_prep_image(filename)
