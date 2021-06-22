@@ -3,27 +3,21 @@ from PIL import Image, ImageOps
 import numpy as np
 
 
-def teachable_machine_classification(img, weights_file):
-    # Load the model
-    model = tf.keras.models.load_model(weights_file)
+def load_and_prep_image(filename,img_shape = 224):
+    img = tf.io.read_file(filename)
+    img = tf.image.decode_image(img)
+    img = tf.image.resize(img , size = [img_shape,img_shape])
+    img = img/255.
+    return img
 
-    # Create the array of the right shape to feed into the keras model
-    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
-    image = img
-    #image sizing
-    size = (224, 224)
-    image = ImageOps.fit(image, size, Image.ANTIALIAS)
 
-    #turn the image into a numpy array
-    image_array = np.asarray(image)
-    # Normalize the image
-   
-
-    # Load the image into the array
-    data[0] = tf.convert_to_tensor(image_array)
+def pred_plot(model,filename,class_names):
     
-    print(data)
+    model = tf.keras.models.load_model("model.sav")
+    img = load_and_prep_image(filename)
 
-    # run the inference
-    prediction = model.predict(data)
-    return np.argmax(prediction) # return position of the highest probability
+    pred = model.predict(tf.expand_dims(img,axis=0))
+
+    pred_class = class_names[tf.argmax(pred[0])]
+    
+    return pred_class
